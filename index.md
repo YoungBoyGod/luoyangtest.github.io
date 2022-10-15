@@ -1,1 +1,1 @@
-[linux]([url](https://github.com/luoyangtest/luoyangtest.github.io/tree/main/linux)) 
+[linux](https://github.com/luoyangtest/luoyangtest.github.io/tree/main/linux) 
