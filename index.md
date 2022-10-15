@@ -1,2 +1,1 @@
-2022年5月22日
-# 开始笔记
+[linux]([url](https://github.com/luoyangtest/luoyangtest.github.io/tree/main/linux)) 
