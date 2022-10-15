@@ -35,7 +35,7 @@
     jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
     打开浏览器输入地址+端口 密码登录
 
-####添加开机自启动
+#### 添加开机自启动
 
 ```shell
 添加service文件
