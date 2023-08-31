@@ -1,0 +1,60 @@
+- hosts: localhost
+  
+  tasks:
+
+  - name: 扫描网段  
+    ansible.builtin.ping:
+      data: pong
+    with_sequence: start=10.2.32.1 end=10.2.32.254
+
+  - name: 尝试SSH登录
+    ansible.builtin.command: uptime
+    delegate_to: "{{item}}" 
+    with_items: "{{groups['all']}}"
+    register: ssh_test
+
+  - name: 添加登录成功主机到组
+    add_host:
+      name: "{{item.item}}"
+      groups: ssh_success
+    when: item.rc == 0
+    with_items: "{{ssh_test.results}}"
+
+  - name: 生成密钥对
+    ansible.builtin.user:
+      name: "{{item}}"
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+
+  - name: 拷贝公钥
+    ansible.posix.authorized_key:
+      user: cad
+      state: present
+      key: "{{lookup('file', '/'.join([ansible_env.HOME, '.ssh/id_rsa.pub']))}}"
+    delegate_to: "{{item}}"
+    with_items: "{{groups['ssh_success']}}"
+
+  - name: 修改sshd配置
+    ansible.builtin.lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: "^PubkeyAuthentication"
+      line: "PubkeyAuthentication yes" 
+    notify: restart sshd
+
+  - name: 添加组到inventory
+    lineinfile:
+      path: /etc/ansible/hosts
+      line: "[ssh_success]"
+
+  - name: 写入主机到inventory
+    lineinfile:
+      path: /etc/ansible/hosts
+      line: "{{item}}"
+    with_items: "{{groups['ssh_success']}}"
+
+  handlers:
+  - name: restart sshd
+    ansible.builtin.service:
+      name: sshd
+      state: restarted
