@@ -8,9 +8,9 @@ dict_switch = {'154': '1', '140': '2', '112': '3', '156': '4', '128': '5', '158'
 
 
 def ssh_server(command):
-    hostname = "10.2.32.251"
+    hostname = "10.2.xx.xxx51"
     username = "public"
-    password = "bluepublic"
+    password = "xxxx"
     paramiko.util.log_to_file("idc_pc_switch.log")
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -23,7 +23,7 @@ def ssh_server(command):
 
 def ping_server(n,ip):
     
-    ip_addr="10.2.32."+ip
+    ip_addr="10.2.23."+ip
     for i in range(0,n):
         p=subprocess.run(["ping","-c","1","-w","2",ip_addr],stdout=subprocess.PIPE)
         pattern="(\d*) packets transmitted, (\d*) received, (\d*)% packet loss, time (\d*)ms"   

@@ -18,7 +18,7 @@ ip_53 = {"login_host": "https://10.2.32.x",
          "login_account": "ADMIN", "login_password": "ADMIN"}
 ip_54 = {"login_host": "https://10.2.32.54",
          "login_account": "admin", "login_password": "admin"}
-ip_215 = {"login_host": "https://10.2.27.215",
+ip_215 = {"login_host": "https://10.2.27.",
           "login_account": "admin", "login_password": "admin"}
 
 dict_info_all = {"52": ip_52, "53": ip_53, "54": ip_54}
