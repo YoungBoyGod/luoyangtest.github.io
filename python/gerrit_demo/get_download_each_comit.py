@@ -36,5 +36,5 @@ def read_xml(workspace,xml_path, project_name, change_num,branch_name,patchset_n
 
 
 if __name__ == "__main__":
-    read_xml("workspace","manifest.xml","driver/bluefin_build","1234","inference","1","12345")
+    read_xml("workspace","manifest.xml","xxxx/xxxx","1234","inference","1","12345")
     
